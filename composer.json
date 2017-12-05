@@ -1,5 +1,5 @@
 {
-  "name": "lokielse/omnipay-wechatpay",
+  "name": "php-cpm/omnipay-wechatpay",
   "type": "library",
   "description": "Wechat gateway for Omnipay payment processing library",
   "keywords": [
@@ -14,12 +14,12 @@
     "purchase",
     "微信支付"
   ],
-  "homepage": "https://github.com/lokielse/omnipay-wechatpay",
+  "homepage": "https://github.com/php-cpm/omnipay-wechatpay",
   "license": "MIT",
   "authors": [
     {
-      "name": "Loki Else",
-      "email": "lokielse@gmail.com"
+      "name": "php-cpm",
+      "email": "zouyi@leying365.com"
     }
   ],
   "autoload": {
@@ -28,9 +28,9 @@
     }
   },
   "require": {
-    "omnipay/common": "~2.0"
+    "omnipay/common": "~2.0|~3.0.x-dev"
   },
   "require-dev": {
-    "omnipay/tests": "~2.0"
+    "omnipay/tests": "~2.0|~3.0.x-dev"
   }
 }
