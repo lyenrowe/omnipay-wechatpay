@@ -3,6 +3,16 @@
 namespace Omnipay\WechatPay;
 
 use Omnipay\Common\AbstractGateway;
+use Omnipay\WechatPay\Message\CreateOrderRequest;
+use Omnipay\WechatPay\Message\CompletePurchaseRequest;
+use Omnipay\WechatPay\Message\QueryOrderRequest;
+use Omnipay\WechatPay\Message\QueryRefundRequest;
+use Omnipay\WechatPay\Message\CloseOrderRequest;
+use Omnipay\WechatPay\Message\RefundOrderRequest;
+use Omnipay\WechatPay\Message\CompleteRefundRequest;
+use Omnipay\WechatPay\Message\PromotionTransferRequest;
+use Omnipay\WechatPay\Message\QueryTransferRequest;
+use Omnipay\WechatPay\Message\DownloadBillRequest;
 
 abstract class BaseAbstractGateway extends AbstractGateway
 {
@@ -105,7 +115,7 @@ abstract class BaseAbstractGateway extends AbstractGateway
     {
         $parameters['trade_type'] = $this->getTradeType();
 
-        return $this->createRequest('\Omnipay\WechatPay\Message\CreateOrderRequest', $parameters);
+        return $this->createRequest(CreateOrderRequest::class, $parameters);
     }
 
 
@@ -122,12 +132,17 @@ abstract class BaseAbstractGateway extends AbstractGateway
      */
     public function completePurchase($parameters = array())
     {
-        return $this->createRequest('\Omnipay\WechatPay\Message\CompletePurchaseRequest', $parameters);
+        return $this->createRequest(CompletePurchaseRequest::class, $parameters);
     }
 
+    /**
+     * @param array $parameters
+     *
+     * @return \Omnipay\WechatPay\Message\CompleteRefundRequest
+     */
     public function completeRefund($parameters = array())
     {
-        return $this->createRequest('\Omnipay\WechatPay\Message\CompleteRefundRequest', $parameters);
+        return $this->createRequest(CompleteRefundRequest::class, $parameters);
     }
 
 
@@ -138,7 +153,7 @@ abstract class BaseAbstractGateway extends AbstractGateway
      */
     public function query($parameters = array())
     {
-        return $this->createRequest('\Omnipay\WechatPay\Message\QueryOrderRequest', $parameters);
+        return $this->createRequest(QueryOrderRequest::class, $parameters);
     }
 
 
@@ -149,7 +164,7 @@ abstract class BaseAbstractGateway extends AbstractGateway
      */
     public function close($parameters = array())
     {
-        return $this->createRequest('\Omnipay\WechatPay\Message\CloseOrderRequest', $parameters);
+        return $this->createRequest(CloseOrderRequest::class, $parameters);
     }
 
 
@@ -160,18 +175,18 @@ abstract class BaseAbstractGateway extends AbstractGateway
      */
     public function refund($parameters = array())
     {
-        return $this->createRequest('\Omnipay\WechatPay\Message\RefundOrderRequest', $parameters);
+        return $this->createRequest(RefundOrderRequest::class, $parameters);
     }
 
 
     /**
      * @param array $parameters
      *
-     * @return \Omnipay\WechatPay\Message\QueryOrderRequest
+     * @return \Omnipay\WechatPay\Message\QueryRefundRequest
      */
     public function queryRefund($parameters = array())
     {
-        return $this->createRequest('\Omnipay\WechatPay\Message\QueryRefundRequest', $parameters);
+        return $this->createRequest(QueryRefundRequest::class, $parameters);
     }
 
 
@@ -182,7 +197,7 @@ abstract class BaseAbstractGateway extends AbstractGateway
      */
     public function transfer($parameters = array())
     {
-        return $this->createRequest('\Omnipay\WechatPay\Message\PromotionTransferRequest', $parameters);
+        return $this->createRequest(PromotionTransferRequest::class, $parameters);
     }
 
 
@@ -193,7 +208,7 @@ abstract class BaseAbstractGateway extends AbstractGateway
      */
     public function queryTransfer($parameters = array())
     {
-        return $this->createRequest('\Omnipay\WechatPay\Message\QueryTransferRequest', $parameters);
+        return $this->createRequest(QueryTransferRequest::class, $parameters);
     }
 
 
@@ -204,6 +219,6 @@ abstract class BaseAbstractGateway extends AbstractGateway
      */
     public function downloadBill($parameters = array())
     {
-        return $this->createRequest('\Omnipay\WechatPay\Message\DownloadBillRequest', $parameters);
+        return $this->createRequest(DownloadBillRequest::class, $parameters);
     }
 }

@@ -42,7 +42,7 @@ class CreateOrderRequest extends BaseAbstractRequest
             $this->validate('open_id');
         }
 
-        $data = array(
+        $data = [
             'appid'            => $this->getAppId(),//*
             'mch_id'           => $this->getMchId(),
             'device_info'      => $this->getDeviceInfo(),//*
@@ -61,7 +61,7 @@ class CreateOrderRequest extends BaseAbstractRequest
             'limit_pay'        => $this->getLimitPay(),
             'openid'           => $this->getOpenId(),//*(trade_type=JSAPI)
             'nonce_str'        => md5(uniqid()),//*
-        );
+        ];
 
         $data = array_filter($data);
 
