@@ -2,16 +2,18 @@
 
 namespace Omnipay\WechatPay\Tests;
 
+use Omnipay\Common\Http\Client;
 use Omnipay\Omnipay;
-use Omnipay\Tests\GatewayTestCase;
-use Omnipay\WechatPay\Gateway;
+use Omnipay\Tests\TestCase;
+use Omnipay\WechatPay\AppGateway;
 use Omnipay\WechatPay\Message\CloseOrderResponse;
 use Omnipay\WechatPay\Message\CompletePurchaseResponse;
 use Omnipay\WechatPay\Message\CreateOrderResponse;
 use Omnipay\WechatPay\Message\QueryOrderResponse;
 use Omnipay\WechatPay\Message\RefundOrderResponse;
+use Symfony\Component\HttpFoundation\Request;
 
-class GatewayTest extends GatewayTestCase
+class AppGatewayTest extends TestCase
 {
 
     /**
@@ -21,17 +23,12 @@ class GatewayTest extends GatewayTestCase
 
     protected $options;
 
-    protected $fuckTimeout = true;
+    protected $fuckTimeout = false;
 
 
     public function setUp()
     {
-        $this->gateway = new Gateway($this->getHttpClient(), $this->getHttpRequest());
-        $this->gateway->setAppId('123456789');
-        $this->gateway->setMchId('123456789');
-        $this->gateway->setApiKey('XXSXXXSXXSXXSX');
-        $this->gateway->setNotifyUrl('http://example.com/notify');
-        $this->gateway->setTradeType('APP');
+        $this->gateway = new AppGateway(new \GuzzleHttp\Client());
     }
 
 
@@ -42,16 +39,22 @@ class GatewayTest extends GatewayTestCase
         }
 
         $order = array(
-            'body'             => 'test', //Your order ID
-            'out_trade_no'     => date('YmdHis'), //Should be format 'YmdHis'
-            'total_fee'        => '0.01', //Order Title
-            'spbill_create_ip' => '114.119.110.120', //Order Total Fee
+            'app_id' => '123456789',
+            'mch_id' => '123456789',
+            'api_key' => 'XXSXXXSXXSXXSX',
+            'notify_url' => 'http://example.com/notify',
+            'trade_type' => 'APP',
+            'body'             => 'test', //body
+            'out_trade_no'     => date('YmdHis'), //order no
+            'total_fee'        => '0.01', // money
+            'spbill_create_ip' => '114.119.110.120', //Order client IP
         );
 
         /**
          * @var CreateOrderResponse $response
          */
         $response = $this->gateway->purchase($order)->send();
+        print_r($order);
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
     }
