@@ -347,9 +347,7 @@ class CreateOrderRequest extends BaseAbstractRequest
      */
     public function sendData($data)
     {
-        $request      = $this->httpClient->post($this->endpoint)->setBody(Helper::array2xml($data));
-        $response     = $request->send()->getBody();
-        $responseData = Helper::xml2array($response);
+        $responseData = $this->post($data);
 
         return $this->response = new CreateOrderResponse($this, $responseData);
     }

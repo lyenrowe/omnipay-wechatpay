@@ -3,13 +3,17 @@
 namespace Omnipay\WechatPay\Message;
 
 use Omnipay\Common\Message\AbstractRequest;
+use Omnipay\WechatPay\Helper;
 
 /**
  * Class BaseAbstractRequest
+ *
  * @package Omnipay\WechatPay\Message
  */
 abstract class BaseAbstractRequest extends AbstractRequest
 {
+
+    protected $endpoint;
 
     /**
      * @return mixed
@@ -62,5 +66,28 @@ abstract class BaseAbstractRequest extends AbstractRequest
     public function setMchId($mchId)
     {
         $this->setParameter('mch_id', $mchId);
+    }
+
+    public function post($data)
+    {
+        $response = $this->post($data);
+
+        return Helper::xml2array($response->getBody());
+    }
+
+    public function setSSLClient()
+    {
+        $options = [
+            'curl' => [
+                CURLOPT_SSL_VERIFYPEER => true,
+                CURLOPT_SSL_VERIFYHOST => 2,
+                CURLOPT_SSLCERTTYPE    => 'PEM',
+                CURLOPT_SSLKEYTYPE     => 'PEM',
+                CURLOPT_SSLCERT        => $this->getCertPath(),
+                CURLOPT_SSLKEY         => $this->getKeyPath(),
+            ]
+        ];
+
+        $this->httpClient = \Http\Adapter\Guzzle6\Client::createWithConfig($options);
     }
 }

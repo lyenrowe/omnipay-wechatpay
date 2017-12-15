@@ -237,20 +237,8 @@ class RefundOrderRequest extends BaseAbstractRequest
      */
     public function sendData($data)
     {
-        $options = array(
-            CURLOPT_SSL_VERIFYPEER => true,
-            CURLOPT_SSL_VERIFYHOST => 2,
-            CURLOPT_SSLCERTTYPE    => 'PEM',
-            CURLOPT_SSLKEYTYPE     => 'PEM',
-            CURLOPT_SSLCERT        => $this->getCertPath(),
-            CURLOPT_SSLKEY         => $this->getKeyPath(),
-        );
-
-        $body         = Helper::array2xml($data);
-        $request      = $this->httpClient->post($this->endpoint, null, $data)->setBody($body);
-        $request->getCurlOptions()->overwriteWith($options);
-        $response     = $request->send()->getBody();
-        $responseData = Helper::xml2array($response);
+        $this->setSSLClient();
+        $responseData = $this->post($data);
 
         return $this->response = new RefundOrderResponse($this, $responseData);
     }
