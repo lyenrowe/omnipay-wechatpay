@@ -70,7 +70,7 @@ abstract class BaseAbstractRequest extends AbstractRequest
 
     public function post($data)
     {
-        $response = $this->post($data);
+        $response = $this->httpClient->post($this->endpoint, [], Helper::array2xml($data));
 
         return Helper::xml2array($response->getBody());
     }
