@@ -28,7 +28,13 @@ class AppGatewayTest extends TestCase
 
     public function setUp()
     {
-        $this->gateway = new AppGateway(new \GuzzleHttp\Client());
+        $this->gateway = new AppGateway();
+        $configs = [
+            'app_id' => '123456789',
+            'mch_id' => '123456789',
+            'api_key' => 'XXSXXXSXXSXXSX',
+        ];
+        $this->gateway->initialize($configs);
     }
 
 
@@ -54,7 +60,6 @@ class AppGatewayTest extends TestCase
          * @var CreateOrderResponse $response
          */
         $response = $this->gateway->purchase($order)->send();
-        print_r($order);
         $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isRedirect());
     }

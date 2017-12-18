@@ -18,27 +18,6 @@ class CreateOrderResponse extends BaseAbstractResponse
      */
     protected $request;
 
-    public function getData()
-    {
-        $data = null;
-        switch ($this->request->getTradeType()) {
-            case 'JSAPI':
-                $data = $this->getJsOrderData();
-                break;
-            case 'APP':
-                $data = $this->getAppOrderData();
-                break;
-            case 'MWEB':
-                $data = $this->getMwebUrl();
-                break;
-            case 'NATIVE':
-                $data = $this->getCodeUrl();
-                break;
-        }
-
-        return $data;
-    }
-
     public function getAppOrderData()
     {
         if ($this->isSuccessful()) {

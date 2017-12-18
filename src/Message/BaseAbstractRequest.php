@@ -3,6 +3,7 @@
 namespace Omnipay\WechatPay\Message;
 
 use Omnipay\Common\Message\AbstractRequest;
+use Omnipay\WechatPay\GuzzleClient;
 use Omnipay\WechatPay\Helper;
 
 /**
@@ -88,6 +89,6 @@ abstract class BaseAbstractRequest extends AbstractRequest
             ]
         ];
 
-        $this->httpClient = \Http\Adapter\Guzzle6\Client::createWithConfig($options);
+        $this->httpClient = new GuzzleClient($options);
     }
 }
