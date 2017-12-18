@@ -11,9 +11,10 @@ use Omnipay\WechatPay\Message\CompletePurchaseResponse;
 use Omnipay\WechatPay\Message\CreateOrderResponse;
 use Omnipay\WechatPay\Message\QueryOrderResponse;
 use Omnipay\WechatPay\Message\RefundOrderResponse;
+use Omnipay\WechatPay\MwebGateway;
 use Symfony\Component\HttpFoundation\Request;
 
-class AppGatewayTest extends TestCase
+class MwebGatewayTest extends TestCase
 {
 
     /**
@@ -28,7 +29,7 @@ class AppGatewayTest extends TestCase
 
     public function setUp()
     {
-        $this->gateway = new AppGateway();
+        $this->gateway = new MwebGateway();
         $this->options = [
             'app_id' => '123456789',
             'mch_id' => '123456789',
@@ -43,8 +44,8 @@ class AppGatewayTest extends TestCase
         $this->assertEquals($this->options['api_key'], $this->gateway->getApiKey());
         $this->assertEquals($this->options['mch_id'], $this->gateway->getMchId());
         $this->assertEquals('', $this->gateway->getCurrency());
-        $this->assertEquals('WechatPay App', $this->gateway->getName());
-        $this->assertEquals('APP', $this->gateway->getTradeType());
+        $this->assertEquals('WechatPay Mweb', $this->gateway->getName());
+        $this->assertEquals('MWEB', $this->gateway->getTradeType());
     }
 
     public function testPurchase()
