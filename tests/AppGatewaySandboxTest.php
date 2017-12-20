@@ -39,6 +39,8 @@ class AppGatewaySandboxTest extends TestCase
             'env'     => 'sandbox',
         ];
         $this->gateway->initialize($this->options);
+        $signKey = $this->gateway->getSandBoxSignKey();
+        $this->gateway->setApiKey($signKey);
     }
 
     public function testParams()
