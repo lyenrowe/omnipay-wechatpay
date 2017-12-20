@@ -18,7 +18,7 @@ class CreateOrderResponse extends BaseAbstractResponse
      */
     protected $request;
 
-    public function getAppOrderData()
+    public function getAppOrderData($apiKey = '')
     {
         if ($this->isSuccessful()) {
             $data = [
@@ -30,7 +30,7 @@ class CreateOrderResponse extends BaseAbstractResponse
                 'timestamp' => time(),
             ];
 
-            $data['sign'] = Helper::sign($data, $this->request->getApiKey());
+            $data['sign'] = Helper::sign($data, $this->getApiKey($apiKey));
             if ($this->request->getEnv() == 'sandbox') {
                 $data['mode'] = 'sandbox';
             }
@@ -41,6 +41,10 @@ class CreateOrderResponse extends BaseAbstractResponse
         return $data;
     }
 
+    public function getApiKey($apiKey = '')
+    {
+        return $apiKey ? $apiKey : $this->request->getApiKey();
+    }
 
     public function getPrepayId()
     {
