@@ -83,9 +83,7 @@ abstract class BaseAbstractRequest extends AbstractRequest
     public function getEndpoint()
     {
         if ($this->getEnv() == 'sandbox') {
-            $this->endpoint = str_replace('api.mch.weixin.qq.com', 'api.mch.weixin.qq.com/sandboxnew', $this->endpoint);
-        } else {
-            $this->endpoint = str_replace('api.mch.weixin.qq.com/sandboxnew', 'api.mch.weixin.qq.com', $this->endpoint);
+            return str_replace('api.mch.weixin.qq.com', 'api.mch.weixin.qq.com/sandboxnew', $this->endpoint);
         }
 
         return $this->endpoint;
@@ -95,7 +93,9 @@ abstract class BaseAbstractRequest extends AbstractRequest
     {
         $response = $this->httpClient->post($this->getEndpoint(), [], Helper::array2xml($data));
 
-        return Helper::xml2array($response->getBody());
+        $result = Helper::xml2array($response->getBody());
+
+        return $result;
     }
 
     public function setSSLClient()

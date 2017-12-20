@@ -12,4 +12,10 @@ use Omnipay\WechatPay\Helper;
  */
 class GetSignKeyResponse extends BaseAbstractResponse
 {
+
+    public function getKey()
+    {
+        $data = $this->getData();
+        return $data['sandbox_signkey'];
+    }
 }

@@ -5,6 +5,7 @@ namespace Omnipay\WechatPay;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\WechatPay\Message\CreateOrderRequest;
 use Omnipay\WechatPay\Message\CompletePurchaseRequest;
+use Omnipay\WechatPay\Message\GetSignKeyRequest;
 use Omnipay\WechatPay\Message\QueryOrderRequest;
 use Omnipay\WechatPay\Message\QueryRefundRequest;
 use Omnipay\WechatPay\Message\CloseOrderRequest;
@@ -55,6 +56,16 @@ abstract class BaseAbstractGateway extends AbstractGateway
     public function getMchId()
     {
         return $this->getParameter('mch_id');
+    }
+
+    public function setEnv($env)
+    {
+        $this->setParameter('env', $env);
+    }
+
+    public function getEnv()
+    {
+        return $this->getParameter('env');
     }
 
 
@@ -116,6 +127,12 @@ abstract class BaseAbstractGateway extends AbstractGateway
         $parameters['trade_type'] = $this->getTradeType();
 
         return $this->createRequest(CreateOrderRequest::class, $parameters);
+    }
+
+    public function getsignkey($parameters = array())
+    {
+        $parameters['env'] = 'sandbox';
+        return $this->createRequest(GetSignKeyRequest::class, $parameters);
     }
 
 

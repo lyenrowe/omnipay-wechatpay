@@ -30,12 +30,6 @@ class GetSignKeyRequest extends BaseAbstractRequest
             'mch_id'
         );
 
-        $tradeType = strtoupper($this->getTradeType());
-
-        if ($tradeType == 'JSAPI') {
-            $this->validate('open_id');
-        }
-
         $data = [
             'mch_id'           => $this->getMchId(),
             'nonce_str'        => md5(uniqid()),//*
