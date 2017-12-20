@@ -39,16 +39,11 @@ class AppGatewaySandboxTest extends TestCase
             'env'     => 'sandbox',
         ];
         $this->gateway->initialize($this->options);
-        $response = $this->gateway->getsignkey($this->options)->send();
-        $this->apiKey = $response->getKey();
-        //设置为沙箱key
-        $this->gateway->setApiKey($this->apiKey);
     }
 
     public function testParams()
     {
         $this->assertEquals($this->options['app_id'], $this->gateway->getAppId());
-        $this->assertEquals($this->apiKey, $this->gateway->getApiKey());
         $this->assertEquals($this->options['mch_id'], $this->gateway->getMchId());
         $this->assertEquals($this->options['mch_id'], $this->gateway->getMchId());
         $this->assertEquals('', $this->gateway->getCurrency());

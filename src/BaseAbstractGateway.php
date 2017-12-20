@@ -61,6 +61,9 @@ abstract class BaseAbstractGateway extends AbstractGateway
     public function setEnv($env)
     {
         $this->setParameter('env', $env);
+        $response = $this->getsignkey($this->parameters->all())->send();
+        //设置为沙箱key
+        $this->setApiKey($response->getKey());
     }
 
     public function getEnv()
