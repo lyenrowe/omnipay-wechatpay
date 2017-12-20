@@ -30,6 +30,10 @@ class CreateOrderResponse extends BaseAbstractResponse
                 'timestamp' => time(),
             ];
 
+            if ($this->request->getEnv() == 'sandbox') {
+                $data['mode'] = 'sandbox';
+            }
+
             $data['sign'] = Helper::sign($data, $this->request->getApiKey());
         } else {
             $data = null;

@@ -75,9 +75,14 @@ abstract class BaseAbstractRequest extends AbstractRequest
         $this->env = ($env == 'sandbox' ? 'sandbox' : null);
     }
 
+    public function getEnv()
+    {
+        return $this->env;
+    }
+
     public function getEndpoint()
     {
-        if ($this->env == 'sandbox') {
+        if ($this->getEnv() == 'sandbox') {
             $this->endpoint = str_replace('api.mch.weixin.qq.com', 'api.mch.weixin.qq.com/sandboxnew', $this->endpoint);
         } else {
             $this->endpoint = str_replace('api.mch.weixin.qq.com/sandboxnew', 'api.mch.weixin.qq.com', $this->endpoint);
