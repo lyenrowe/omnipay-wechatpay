@@ -15,6 +15,7 @@ abstract class BaseAbstractRequest extends AbstractRequest
 {
 
     protected $endpoint;
+    protected $env = null;
 
     /**
      * @return mixed
@@ -69,9 +70,25 @@ abstract class BaseAbstractRequest extends AbstractRequest
         $this->setParameter('mch_id', $mchId);
     }
 
+    public function setEnv($env)
+    {
+        $this->env = ($env == 'sandbox' ? 'sandbox' : null);
+    }
+
+    public function getEndpoint()
+    {
+        if ($this->env == 'sandbox') {
+            $this->endpoint = str_replace('api.mch.weixin.qq.com', 'api.mch.weixin.qq.com/sandboxnew', $this->endpoint);
+        } else {
+            $this->endpoint = str_replace('api.mch.weixin.qq.com/sandboxnew', 'api.mch.weixin.qq.com', $this->endpoint);
+        }
+
+        return $this->endpoint;
+    }
+
     public function post($data)
     {
-        $response = $this->httpClient->post($this->endpoint, [], Helper::array2xml($data));
+        $response = $this->httpClient->post($this->getEndpoint(), [], Helper::array2xml($data));
 
         return Helper::xml2array($response->getBody());
     }

@@ -8,6 +8,7 @@ use Omnipay\Tests\TestCase;
 use Omnipay\WechatPay\AppGateway;
 use Omnipay\WechatPay\Message\CloseOrderResponse;
 use Omnipay\WechatPay\Message\CompletePurchaseResponse;
+use Omnipay\WechatPay\Message\CreateOrderRequest;
 use Omnipay\WechatPay\Message\CreateOrderResponse;
 use Omnipay\WechatPay\Message\QueryOrderResponse;
 use Omnipay\WechatPay\Message\RefundOrderResponse;
@@ -35,6 +36,21 @@ class AppGatewayTest extends TestCase
             'api_key' => 'XXSXXXSXXSXXSX',
         ];
         $this->gateway->initialize($this->options);
+    }
+
+    public function testEnv()
+    {
+        $client = new \Http\Adapter\Guzzle6\Client();
+        $request = new Request();
+        $req  = new CreateOrderRequest($client, $request);
+        $link = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
+        $this->assertEquals($link, $req->getEndpoint());
+        $req  = new CreateOrderRequest($client, $request);
+        $req->setEnv('sandbox');
+        $link2 = 'https://api.mch.weixin.qq.com/sandboxnew/pay/unifiedorder';
+        $this->assertEquals($link2, $req->getEndpoint());
+        $req->setEnv('nothing');
+        $this->assertEquals($link, $req->getEndpoint());
     }
 
     public function testParams()
