@@ -58,6 +58,17 @@ abstract class BaseAbstractGateway extends AbstractGateway
         return $this->getParameter('mch_id');
     }
 
+    public function setSubMchId($subMchId)
+    {
+        $this->setParameter('sub_mch_id', $subMchId);
+    }
+
+
+    public function getSubMchId()
+    {
+        return $this->getParameter('sub_mch_id');
+    }
+
     public function setEnv($env)
     {
         $this->setParameter('env', $env);

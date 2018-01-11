@@ -1,5 +1,10 @@
 # Omnipay: WechatPay
 
+本项目基于Omnipay 3.0分支开发，依赖版本较新，也可能会带来不稳定的可能。
+
+增加子商户模式
+增加沙箱模式
+
 **WechatPay driver for the Omnipay PHP payment processing library**
 
 [![Build Status](https://travis-ci.org/lokielse/omnipay-wechatpay.png?branch=master)](https://travis-ci.org/lokielse/omnipay-wechatpay)

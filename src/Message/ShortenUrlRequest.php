@@ -34,7 +34,9 @@ class ShortenUrlRequest extends BaseAbstractRequest
             'long_url'  => $this->getLongUrl(),
             'nonce_str' => md5(uniqid()),
         );
-
+        if ($this->getSubMchId()) {
+            $data['sub_mch_id'] = $this->getSubMchId();
+        }
         $data = array_filter($data);
 
         $data['sign'] = Helper::sign($data, $this->getApiKey());

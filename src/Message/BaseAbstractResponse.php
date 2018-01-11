@@ -20,10 +20,7 @@ abstract class BaseAbstractResponse extends AbstractResponse
     public function isSuccessful()
     {
         $data = $this->getData();
-        $result = isset($data['result_code']) && $data['result_code'] == 'SUCCESS';
-        if ($result) {
-            return $result;
-        }
-        return false;
+
+        return isset($data['result_code']) && $data['result_code'] == 'SUCCESS';
     }
 }

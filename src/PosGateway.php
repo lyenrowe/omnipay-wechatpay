@@ -1,6 +1,8 @@
 <?php
 
 namespace Omnipay\WechatPay;
+use Omnipay\WechatPay\Message\CreateMicroOrderRequest;
+use Omnipay\WechatPay\Message\QueryOpenIdByAuthCodeRequest;
 
 /**
  * Class PosGateway
@@ -23,7 +25,8 @@ class PosGateway extends BaseAbstractGateway
     {
         $parameters['trade_type'] = $this->getTradeType();
 
-        return $this->createRequest('\Omnipay\WechatPay\Message\CreateMicroOrderRequest', $parameters);
+
+        return $this->createRequest(CreateMicroOrderRequest::class, $parameters);
     }
 
 
@@ -34,6 +37,6 @@ class PosGateway extends BaseAbstractGateway
      */
     public function queryOpenId($parameters = array())
     {
-        return $this->createRequest('\Omnipay\WechatPay\Message\QueryOpenIdByAuthCodeRequest', $parameters);
+        return $this->createRequest(QueryOpenIdByAuthCodeRequest::class, $parameters);
     }
 }

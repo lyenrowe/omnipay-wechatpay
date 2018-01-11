@@ -34,7 +34,9 @@ class QueryTransferRequest extends BaseAbstractRequest
             'partner_trade_no' => $this->getPartnerTradeNo(),
             'nonce_str'        => md5(uniqid()),
         );
-
+        if ($this->getSubMchId()) {
+            $data['sub_mch_id'] = $this->getSubMchId();
+        }
         $data = array_filter($data);
 
         $data['sign'] = Helper::sign($data, $this->getApiKey());

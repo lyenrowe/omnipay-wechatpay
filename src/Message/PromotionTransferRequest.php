@@ -32,7 +32,7 @@ class PromotionTransferRequest extends BaseAbstractRequest
 
         $data = [
             'mch_appid'        => $this->getAppId(),
-            'mchid'            => $this->getMchId(),
+            'mch_id'            => $this->getMchId(),
             'device_info'      => $this->getDeviceInfo(),     // <optional>
             'partner_trade_no' => $this->getPartnerTradeNo(),
             'openid'           => $this->getOpenId(),

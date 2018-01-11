@@ -31,6 +31,9 @@ class CreateMicroOrderResponse extends BaseAbstractResponse
                 'timestamp' => time() . '',
             ];
 
+            if ($this->request->getSubMchId()) {
+                $data['sub_mch_id'] = $this->request->getSubMchId();
+            }
             $data['sign'] = Helper::sign($data, $this->request->getApiKey());
         } else {
             $data = null;
