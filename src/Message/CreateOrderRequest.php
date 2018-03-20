@@ -16,7 +16,6 @@ class CreateOrderRequest extends BaseAbstractRequest
 {
     protected $endpoint = 'https://api.mch.weixin.qq.com/pay/unifiedorder';
 
-
     /**
      * Get the raw data array for this message. The format of this varies from gateway to
      * gateway, but will usually be either an associative array, or a SimpleXMLElement.
@@ -39,11 +38,13 @@ class CreateOrderRequest extends BaseAbstractRequest
         $tradeType = strtoupper($this->getTradeType());
 
         if ($tradeType == 'JSAPI') {
-            $this->validate('open_id');
+//            $this->validate('open_id');
         }
 
         $data = [
             'appid'            => $this->getAppId(),//*
+            'sub_appid'        => $this->getSubAppId(),
+            'sub_mch_id'       => $this->getSubMchId(),
             'mch_id'           => $this->getMchId(),
             'device_info'      => $this->getDeviceInfo(),//*
             'body'             => $this->getBody(),//*
@@ -60,16 +61,9 @@ class CreateOrderRequest extends BaseAbstractRequest
             'trade_type'       => $this->getTradeType(), //*
             'limit_pay'        => $this->getLimitPay(),
             'openid'           => $this->getOpenId(),//*(trade_type=JSAPI)
+            'sub_openid'       => $this->getSubOpenId(),
             'nonce_str'        => md5(uniqid()),//*
         ];
-
-        if ($this->getSubAppId()) {
-            $data['sub_appid'] = $this->getSubAppId();
-        }
-
-        if ($this->getSubMchId()) {
-            $data['sub_mch_id'] = $this->getSubMchId();
-        }
 
         $data = array_filter($data);
 
@@ -77,7 +71,6 @@ class CreateOrderRequest extends BaseAbstractRequest
 
         return $data;
     }
-
 
     /**
      * @return mixed
@@ -87,7 +80,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         return $this->getParameter('trade_type');
     }
 
-
     /**
      * @return mixed
      */
@@ -95,7 +87,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         return $this->getParameter('device_Info');
     }
-
 
     /**
      * @return mixed
@@ -105,7 +96,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         return $this->getParameter('body');
     }
 
-
     /**
      * @return mixed
      */
@@ -113,7 +103,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         return $this->getParameter('detail');
     }
-
 
     /**
      * @return mixed
@@ -123,7 +112,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         return $this->getParameter('attach');
     }
 
-
     /**
      * @return mixed
      */
@@ -131,7 +119,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         return $this->getParameter('out_trade_no');
     }
-
 
     /**
      * @return mixed
@@ -141,7 +128,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         return $this->getParameter('fee_type');
     }
 
-
     /**
      * @return mixed
      */
@@ -149,7 +135,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         return $this->getParameter('total_fee');
     }
-
 
     /**
      * @return mixed
@@ -159,7 +144,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         return $this->getParameter('spbill_create_ip');
     }
 
-
     /**
      * @return mixed
      */
@@ -167,7 +151,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         return $this->getParameter('time_start');
     }
-
 
     /**
      * @return mixed
@@ -177,7 +160,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         return $this->getParameter('time_expire');
     }
 
-
     /**
      * @return mixed
      */
@@ -185,7 +167,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         return $this->getParameter('goods_tag');
     }
-
 
     /**
      * @return mixed
@@ -195,7 +176,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         return $this->getParameter('notify_url');
     }
 
-
     /**
      * @return mixed
      */
@@ -203,7 +183,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         return $this->getParameter('limit_pay');
     }
-
 
     /**
      * @return mixed
@@ -213,6 +192,13 @@ class CreateOrderRequest extends BaseAbstractRequest
         return $this->getParameter('open_id');
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSubOpenId()
+    {
+        return $this->getParameter('sub_open_id');
+    }
 
     /**
      * @param mixed $deviceInfo
@@ -222,7 +208,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         $this->setParameter('device_Info', $deviceInfo);
     }
 
-
     /**
      * @param mixed $body
      */
@@ -230,7 +215,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         $this->setParameter('body', $body);
     }
-
 
     /**
      * @param mixed $detail
@@ -240,7 +224,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         $this->setParameter('detail', $detail);
     }
 
-
     /**
      * @param mixed $attach
      */
@@ -248,7 +231,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         $this->setParameter('attach', $attach);
     }
-
 
     /**
      * @param mixed $outTradeNo
@@ -258,7 +240,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         $this->setParameter('out_trade_no', $outTradeNo);
     }
 
-
     /**
      * @param mixed $feeType
      */
@@ -266,7 +247,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         $this->setParameter('fee_type', $feeType);
     }
-
 
     /**
      * @param mixed $totalFee
@@ -276,7 +256,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         $this->setParameter('total_fee', $totalFee);
     }
 
-
     /**
      * @param mixed $spbillCreateIp
      */
@@ -284,7 +263,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         $this->setParameter('spbill_create_ip', $spbillCreateIp);
     }
-
 
     /**
      * @param mixed $timeStart
@@ -294,7 +272,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         $this->setParameter('time_start', $timeStart);
     }
 
-
     /**
      * @param mixed $timeExpire
      */
@@ -302,7 +279,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         $this->setParameter('time_expire', $timeExpire);
     }
-
 
     /**
      * @param mixed $goodsTag
@@ -312,12 +288,10 @@ class CreateOrderRequest extends BaseAbstractRequest
         $this->setParameter('goods_tag', $goodsTag);
     }
 
-
     public function setNotifyUrl($notifyUrl)
     {
         $this->setParameter('notify_url', $notifyUrl);
     }
-
 
     /**
      * @param mixed $tradeType
@@ -327,7 +301,6 @@ class CreateOrderRequest extends BaseAbstractRequest
         $this->setParameter('trade_type', $tradeType);
     }
 
-
     /**
      * @param mixed $limitPay
      */
@@ -335,7 +308,6 @@ class CreateOrderRequest extends BaseAbstractRequest
     {
         $this->setParameter('limit_pay', $limitPay);
     }
-
 
     /**
      * @param mixed $openId
@@ -345,6 +317,13 @@ class CreateOrderRequest extends BaseAbstractRequest
         $this->setParameter('open_id', $openId);
     }
 
+    /**
+     * @param mixed $subOpenId
+     */
+    public function setSubOpenId($subOpenId)
+    {
+        $this->setParameter('sub_open_id', $subOpenId);
+    }
 
     /**
      * Send the request with specified data

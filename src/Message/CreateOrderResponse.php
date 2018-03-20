@@ -57,7 +57,7 @@ class CreateOrderResponse extends BaseAbstractResponse
     {
         if ($this->isSuccessful()) {
             $data = [
-                'appId'     => $this->request->getAppId(),
+                'appId'     => $this->request->getSubAppId() ? $this->request->getSubAppId() : $this->request->getAppId(),
                 'package'   => 'prepay_id=' . $this->getPrepayId(),
                 'nonceStr'  => md5(uniqid()),
                 'timeStamp' => time() . '',
