@@ -3,6 +3,7 @@
 namespace Omnipay\WechatPay\Message;
 
 use Omnipay\Common\Message\ResponseInterface;
+use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\WechatPay\Helper;
 
 /**
@@ -38,7 +39,11 @@ class CreateOrderRequest extends BaseAbstractRequest
         $tradeType = strtoupper($this->getTradeType());
 
         if ($tradeType == 'JSAPI') {
-//            $this->validate('open_id');
+            $openId = $this->parameters->get('open_id');
+            $subOpenId = $this->parameters->get('sub_open_id');
+            if (! isset($openId) || !isset($subOpenId)) {
+                throw new InvalidRequestException("The open_id or sub_open_id parameter is required");
+            }
         }
 
         $data = [
