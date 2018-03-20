@@ -41,7 +41,7 @@ class CreateOrderRequest extends BaseAbstractRequest
         if ($tradeType == 'JSAPI') {
             $openId = $this->parameters->get('open_id');
             $subOpenId = $this->parameters->get('sub_open_id');
-            if (! isset($openId) || !isset($subOpenId)) {
+            if (! isset($openId) && !isset($subOpenId)) {
                 throw new InvalidRequestException("The open_id or sub_open_id parameter is required");
             }
         }
