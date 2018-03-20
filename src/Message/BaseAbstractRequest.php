@@ -81,6 +81,24 @@ abstract class BaseAbstractRequest extends AbstractRequest
         return $this->getParameter('sub_mch_id');
     }
 
+    /**
+     * 子商户 app_id
+     *
+     * @return mixed
+     */
+    public function getSubAppId()
+    {
+        return $this->getParameter('sub_appid');
+    }
+
+    /**
+     * @param mixed $subAppId
+     */
+    public function setSubAppId($subAppId)
+    {
+        $this->setParameter('sub_appid', $subAppId);
+    }
+    
     public function setEnv($env)
     {
         $this->env = ($env == 'sandbox' ? 'sandbox' : null);

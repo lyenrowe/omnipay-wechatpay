@@ -58,15 +58,39 @@ abstract class BaseAbstractGateway extends AbstractGateway
         return $this->getParameter('mch_id');
     }
 
+    /**
+     * @return mixed $subMchId
+     */
+    public function getSubMchId()
+    {
+        return $this->getParameter('sub_mch_id');
+    }
+
+    /**
+     * 子商户id
+     * @param $subMchId
+     */
     public function setSubMchId($subMchId)
     {
         $this->setParameter('sub_mch_id', $subMchId);
     }
 
-
-    public function getSubMchId()
+    /**
+     * 子商户 app_id
+     *
+     * @return mixed
+     */
+    public function getSubAppId()
     {
-        return $this->getParameter('sub_mch_id');
+        return $this->getParameter('sub_appid');
+    }
+
+    /**
+     * @param mixed $subAppId
+     */
+    public function setSubAppId($subAppId)
+    {
+        $this->setParameter('sub_appid', $subAppId);
     }
 
     public function setEnv($env)

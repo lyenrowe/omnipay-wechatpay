@@ -39,9 +39,15 @@ class QueryOrderRequest extends BaseAbstractRequest
             'out_trade_no'   => $this->getOutTradeNo(),
             'nonce_str'      => md5(uniqid()),
         );
+
+        if ($this->getSubAppId()) {
+            $data['sub_appid'] = $this->getSubAppId();
+        }
+
         if ($this->getSubMchId()) {
             $data['sub_mch_id'] = $this->getSubMchId();
         }
+
         $data = array_filter($data);
 
         $data['sign'] = Helper::sign($data, $this->getApiKey());
