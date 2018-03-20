@@ -4,6 +4,7 @@
 
 增加子商户模式
 增加沙箱模式
+子商户模式支持小程序的sub_appid和sub_openid传递
 
 **WechatPay driver for the Omnipay PHP payment processing library**
 
