@@ -11,7 +11,7 @@ class LiteGateway extends BaseAbstractGateway
 {
     public function getName()
     {
-        return 'WechatPay Lite API/MP';
+        return 'WechatPay Lite';
     }
 
 
