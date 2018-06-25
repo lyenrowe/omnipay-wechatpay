@@ -15,6 +15,10 @@ class PosGateway extends BaseAbstractGateway
         return 'WechatPay Pos';
     }
 
+    public function getTradeType()
+    {
+        return 'MICROPAY';
+    }
 
     /**
      * @param array $parameters
