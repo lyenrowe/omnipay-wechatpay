@@ -19,18 +19,31 @@ class QueryOrderResponse extends BaseAbstractResponse
     {
         $data = $this->getData();
 
-        return isset($data['result_code']) && $data['result_code'] == 'SUCCESS' && $this->getTradeState()  == 'SUCCESS';
+        return isset($data['result_code']) && $data['result_code'] == 'SUCCESS';
     }
 
-    public function isPaying()
+    public function isWaitPay()
     {
-        return $this->getTradeState() == 'USERPAYING';
+        return $this->getTradeStatus() == 'USERPAYING';
     }
 
-    public function getTradeState()
+    public function isPaid()
+    {
+        return  $this->getTradeStatus()  == 'SUCCESS';
+    }
+
+    /**
+     * @return string
+     */
+    public function getTradeStatus()
     {
         $data = $this->getData();
 
         return isset($data['trade_state']) ? $data['trade_state'] : '';
+    }
+
+    public function isClosed()
+    {
+        return ($this->getTradeStatus() == 'CLOSED' || $this->getTradeStatus() == 'REVOKED');
     }
 }
