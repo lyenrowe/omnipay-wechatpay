@@ -14,6 +14,7 @@ use Omnipay\WechatPay\Message\CompleteRefundRequest;
 use Omnipay\WechatPay\Message\PromotionTransferRequest;
 use Omnipay\WechatPay\Message\QueryTransferRequest;
 use Omnipay\WechatPay\Message\DownloadBillRequest;
+use Omnipay\WechatPay\Message\ReverseOrderRequest;
 
 abstract class BaseAbstractGateway extends AbstractGateway
 {
@@ -225,6 +226,12 @@ abstract class BaseAbstractGateway extends AbstractGateway
         return $this->createRequest(CloseOrderRequest::class, $parameters);
     }
 
+
+    public function cancel($parameters = array())
+    {
+
+        return $this->createRequest(ReverseOrderRequest::class, $parameters);
+    }
 
     /**
      * @param array $parameters
