@@ -8,9 +8,9 @@
 
 **WechatPay driver for the Omnipay PHP payment processing library**
 
-[![Build Status](https://travis-ci.org/php-cpm/omnipay-wechatpay.png?branch=master)](https://travis-ci.org/php-cpm/omnipay-wechatpay)
-[![Latest Stable Version](https://poser.pugx.org/php-cpm/omnipay-wechatpay/version.png)](https://packagist.org/packages/php-cpm/omnipay-wechatpay)
-[![Total Downloads](https://poser.pugx.org/php-cpm/omnipay-wechatpay/d/total.png)](https://packagist.org/packages/php-cpm/omnipay-wechatpay)
+[![Build Status](https://travis-ci.org/lyenrowe/omnipay-wechatpay.png?branch=master)](https://travis-ci.org/lyenrowe/omnipay-wechatpay)
+[![Latest Stable Version](https://poser.pugx.org/lyenrowe/omnipay-wechatpay/version.png)](https://packagist.org/packages/lyenrowe/omnipay-wechatpay)
+[![Total Downloads](https://poser.pugx.org/lyenrowe/omnipay-wechatpay/d/total.png)](https://packagist.org/packages/lyenrowe/omnipay-wechatpay)
 
 [Omnipay](https://github.com/omnipay/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. This package implements WechatPay support for Omnipay.
@@ -20,7 +20,7 @@ processing library for PHP 5.3+. This package implements WechatPay support for O
 Omnipay is installed via [Composer](http://getcomposer.org/). To install, simply add it
 to your `composer.json` file:
 
-    "php-cpm/omnipay-wechatpay": "^3.0",
+    "lyenrowe/omnipay-wechatpay": "^3.0",
 
 And run composer to update your dependencies:
 
