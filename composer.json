@@ -1,5 +1,5 @@
 {
-  "name": "php-cpm/omnipay-wechatpay",
+  "name": "lyenrowe/omnipay-wechatpay",
   "type": "library",
   "description": "Wechat gateway for Omnipay payment processing library",
   "keywords": [
@@ -14,12 +14,12 @@
     "purchase",
     "微信支付"
   ],
-  "homepage": "https://github.com/php-cpm/omnipay-wechatpay",
+  "homepage": "https://github.com/lyenrowe/omnipay-wechatpay",
   "license": "MIT",
   "authors": [
     {
-      "name": "php-cpm",
-      "email": "zouyi@leying365.com"
+      "name": "lyenrowe",
+      "email": "luolaiqing@leying365.com"
     }
   ],
   "autoload": {
