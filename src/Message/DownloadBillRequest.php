@@ -122,7 +122,7 @@ class DownloadBillRequest extends BaseAbstractRequest
     }
 
 
-    private function post($url, $data = array(), $timeout = 3)
+    public function post($url, $data = array(), $timeout = 3)
     {
         $ch = curl_init($url);
 
