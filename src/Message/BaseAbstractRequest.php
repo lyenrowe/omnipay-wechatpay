@@ -2,6 +2,7 @@
 
 namespace Omnipay\WechatPay\Message;
 
+use Omnipay\Common\Exception\InvalidResponseException;
 use Omnipay\Common\Message\AbstractRequest;
 use Omnipay\WechatPay\GuzzleClient;
 use Omnipay\WechatPay\Helper;
@@ -121,8 +122,13 @@ abstract class BaseAbstractRequest extends AbstractRequest
     public function post($data)
     {
         $response = $this->httpClient->post($this->getEndpoint(), [], Helper::array2xml($data));
-
-        $result = Helper::xml2array($response->getBody());
+        try {
+            $result = Helper::xml2array($response->getBody());
+        } catch (\Exception $e) {
+            $message = $e->getMessage() . '|response:' . $response->getBody() . '|request end point:' . $this->getEndpoint()
+                . '|request body:' . Helper::array2xml($data);
+            throw new InvalidResponseException($message, $e->getCode());
+        }
 
         return $result;
     }
